@@ -21,4 +21,13 @@
   
 编码器：实现将协议包对象转换为字节流写入ByteBuf  
 解码器：实现从ByteBuf中读取字节流信息并转换为协议包对象  
-![image](https://github.com/xiaoguaishou520/zrpc/blob/master/images/zrpc-protocol.png)
+![image](https://github.com/xiaoguaishou520/zrpc/blob/master/images/zrpc-protocol.png)  
+
+## 3，zrpc-registry模块
+**【功能】**  
+**实现服务的注册与发现**  
+  
+1）该模块使用的是zookeeper注册中心，利用curator框架实现服务的注册与发现，便于开发  
+2）负载均衡算法为一致性hash算法：创建一个tree，每个节点多设置一个虚拟节点，客户端根据自身定义的hashcode在树上去寻找最近的服务端节点  
+
+![image](https://github.com/xiaoguaishou520/zrpc/blob/master/images/zrpc-registry.png)
