@@ -71,6 +71,7 @@ public class RpcConsumerPostProcessor implements BeanClassLoaderAware, Applicati
         for (String beanDefinitionName : beanDefinitionNames) {
             //2.逐个获取bean的定义信息
             BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanDefinitionName);
+            beanDefinitionBuilder.setInitMethodName("init");
             //3.获取bean的类名称
             String beanClassName = beanDefinition.getBeanClassName();
             if (beanClassName != null) {
