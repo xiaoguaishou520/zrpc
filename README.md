@@ -47,6 +47,14 @@
   
 ![image](https://github.com/xiaoguaishou520/zrpc/blob/master/images/zrpc-provider.png)
 
-
-
+## 5,zrpc-consumer
+**【功能】**  
+**调用远程服务**  
+  
+**【实现逻辑】**  
+1）在bean初始化之前扫描带有@RpcReference注解的bean，并将之实例化，并注册到Spring容器  
+2）生成代理对象，开启一个Netty客户端，在注册中心通过一致性hash算法寻找对应的服务，向服务发起请求获取结果  
+3）编写客户端netty业务逻辑的处理器，处理异步结果  
+  
+![image](https://github.com/xiaoguaishou520/zrpc/blob/master/images/rpc-consumer.png)
 
