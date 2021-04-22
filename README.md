@@ -58,3 +58,6 @@
   
 ![image](https://github.com/xiaoguaishou520/zrpc/blob/master/images/rpc-consumer.png)
 
+## 6，zrpc-interface
+**【功能】**  
+**提供统一的接口**  
