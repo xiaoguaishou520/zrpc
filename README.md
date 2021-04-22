@@ -16,8 +16,10 @@
 **【功能】**  
 **实现自定义协议设计+编解码+序列化**  
   
+**【实现逻辑】**
 1）自定义协议包含MessageHeader和body，其中协议头包含魔数，消息类型，消息状态，序列化类型，消息id，版本号，数据长度等，协议体描述的是请求体或者响应体  
 2）在自定义协议对象传输时，需要将协议头跟协议体信息写入到ByteBuf，此时需要先将协议体经过序列化转换为字节数组才能写入ByteBuf  
+3）编写编码器与解码器，实现Netty进行对象的传输  
   
 编码器：实现将协议包对象转换为字节流写入ByteBuf  
 解码器：实现从ByteBuf中读取字节流信息并转换为协议包对象  
@@ -27,7 +29,24 @@
 **【功能】**  
 **实现服务的注册与发现**  
   
+**【实现逻辑】**
 1）该模块使用的是zookeeper注册中心，利用curator框架实现服务的注册与发现，便于开发  
 2）负载均衡算法为一致性hash算法：创建一个tree，每个节点多设置一个虚拟节点，客户端根据自身定义的hashcode在树上去寻找最近的服务端节点  
 
 ![image](https://github.com/xiaoguaishou520/zrpc/blob/master/images/zrpc-registry.png)
+  
+## 4，zrpc-provider模块
+**【功能】**  
+**实现服务的提供**  
+  
+**【实现逻辑】**  
+1）编写带有注册中心配置的配置文件application.properties，在服务启动的时候读取配置文件的信息  
+2）在bean初始化之后扫描带有@RpcService注解的类，构建服务元信息保存到注册中心并本地缓存一份  
+3）配置文件注入完毕之后，开启一个Netty服务端，发布服务监听客户端的请求  
+4）编写服务端业务处理器，处理客户端的业务请求（解析请求协议包，反馈响应协议包）  
+  
+![image](https://github.com/xiaoguaishou520/zrpc/blob/master/images/zrpc-provider.png)
+
+
+
+
