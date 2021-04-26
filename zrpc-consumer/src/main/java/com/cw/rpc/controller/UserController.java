@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
-    @RpcReference(registryType = "ZOOKEEPER",timeout = 5000)
+    @RpcReference(registryType = "ZOOKEEPER",registryAddr = "42.193.144.43:2181",timeout = 5000)
     private UserService userService;
 
     @GetMapping
