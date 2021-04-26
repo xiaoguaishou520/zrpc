@@ -17,9 +17,9 @@ public class RpcRequestProcessor {
 
     public static void submit(Runnable task) {
         //采用双重检测机制完成线程池的初始化
-        if (threadPool != null) {
+        if (threadPool == null) {
             synchronized (RpcRequestProcessor.class) {
-                if (threadPool != null) {
+                if (threadPool == null) {
                     threadPool = new ThreadPoolExecutor(
                             8,8,30,
                             TimeUnit.SECONDS,new LinkedBlockingDeque<>(1000));
